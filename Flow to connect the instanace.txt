@@ -1,0 +1,7 @@
+first we need to add the user with > adduser name > passwd name > vi /etc/sudores or visudo > name ALL=(ALL:ALL) NOPASSWD:ALL
+vi /etc/ssh/sshd_config > allow passwordauthentication yes > reload service of sshd > login as a user and ssh-keygen 
+go to the .ssh directory and ssh-copy-id target system path 
+Note: must be have a common user like same as a local machine to target machine which we need to do same as in localmachine
+
+
+						

@@ -1,0 +1,85 @@
+cd /tmp
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz
+tar xvf openssl-1.1.1.tar.gz
+cd openssl-1.1.1
+
+sudo make
+sudo make test
+sudo make install
+
+
+<<<<<<<<<<<<DOcker file installation using ansible script >>>>>>>>>>
+ad-hoc commad: 
+	ansible all -m systemd -a "name=docker-ce state=present" \
+	
+---
+- hosts: localhost
+  gather_facts: yes
+  become: yes
+  tasks:
+          - name: Installation of DockerFile
+            apt:
+                    name:
+                        - python-apt
+                        - docker.io
+                        - docker-compose
+						- git
+                    update_cache: yes
+:wq!
+
+<<<<<<<<<<<<<MSR_T_1>>>>>>>>>>>>>>
+
+
+DockerFile > apacheWebserver 
+
+
+<<<<<<<<<<<<Openssl>>>>>>>>>>>>>>
+---
+- hosts: localhost
+  gather_facts: yes
+  become: yes
+  tasks:
+          - name: Making a file
+            file:
+                 path: /root/sslpath
+                 state: directory
+          - name: Downloading the Openssl newVersion
+            get_url: url=https://www.openssl.org/source/openssl-1.1.1.tar.gz dest=/root/sslpath
+          - name: Extracting the file
+            unarchive:
+                    src: /root/sslpath/openssl-1.1.1.tar.gz
+                    dest: /root/sslpath
+          - name: Installing of gcc
+            apt:
+                name: gcc
+          - name: Installation of Make
+            apt:
+                name: make
+            state: present
+          - name: Installation of Make-guile
+            apt:
+                name: make-guile
+            state: present
+          - name: changing the permission of a.sh file
+            copy:
+                    src: /root/a.sh
+                    dest: /root/sslpath/
+                    mode: 0700
+          - name: configuring the Openssl Verison
+            shell: sh /root/sslpath/a.sh
+            args:
+                    chdir: /root/sslpath/openssl-1.1.1
+                    executable: /bin/bash
+            become: true
+~
+
+<<<< /root/sslpath/a.sh>>>>>>>>>>
+
+#!/bin/bash
+#configuring the openssl version
+
+sudo cd /root/sslpath/openssl-1.1.1
+sudo ./config -Wl,--enable-new-dtags,-rpath,'$(LIBRPATH)'
+sudo make
+sudo make install
+~

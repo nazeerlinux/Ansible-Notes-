@@ -1,0 +1,26 @@
+<<<<<<<<<<<<Installation and configuring of nvm 0.33.2 and node 8.12.0>>>>>>>>>>>
+
+---
+- hosts: localhost
+  become: yes
+  gather_facts: yes
+  tasks:
+          - name: Executing the Steps
+            shell: |
+                    apt install build-essential checkinstall
+                    apt install libssl-dev
+                    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+          - name: Install node and set version
+            shell: |
+                    /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 8.12.0 && nvm alias default 8.12.0"
+
+should need a reload of .bashrc file .so we need to do it maually or by using the ANSIBLE we can do 
+
+
+<<<<<<<<<<Installation of Dockerfile-1.13 or latest>>>>>>>>>
+
+ - name: Installation of DockerCompose with Latest version
+            shell: |
+                    curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+                    chmod +x /usr/local/bin/docker-compose
+

@@ -1,0 +1,50 @@
+yum install ansible*
+yum install python-pip -y
+pip install boto -yml
+
+Login to AWS console and add user and download the .csv file 
+touch .boto  ==> chmod 400 .boto
+	
+
+vim palybook.yml
+
+	---
+		-name: ec2 launcher
+		 hosts: localhost
+		 connection: local
+		 tasks:
+			ec2_group:
+			  name: My_AWS_Security
+			  description:allwing port 22 and 80
+			  region: us-west-2
+			  rules: 
+				- proto: tcp
+				  from_port:80
+				  to_port: 80
+				  cidr_ip: 0.0.0.0/0
+			    - proto: tcp
+				  from_port: 22
+				  to_port: 22
+				  cidr_ip: 0.0.0.0/0
+			 rules_egress:
+				- proto: all
+				  cidr_ip: 0.0.0.0/0
+			- name: MSR-Test-1
+			  ec2: 
+				instance_type= t2.micro
+				key_name: keypair name
+				image: image_id
+				region: us-west-2
+				group: My_AWS_Security
+				count:2
+				vpc_subnet_id:
+				wait: yes
+				assgin_public_ip: yes
+cat playbook.yml
+	ansible-playbook task.yml
+	
+ansible-playbook -i pathoffile aws_ec2.yml
+
+
+playbook:
+	ec

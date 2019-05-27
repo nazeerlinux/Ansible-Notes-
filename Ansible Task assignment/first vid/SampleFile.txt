@@ -1,0 +1,28 @@
+ansible-galaxy init name --offline
+we will get the following files 
+
+Defaults:
+	Data about the role/application (Default Variables).
+
+Files:
+	Put the static files here. Files will then be copied on remote machines
+
+Handlers:
+	Tasks which are based on some actions. Triggers (in case config files changes, then it should trigger service to restart)
+
+Meta:
+	it tell about the Role (author of the role, platform, description).
+
+Tasks:	
+ 	core Logic/code. Installing package, coping files etc.
+
+Templates:
+	This are Dynamic files, similar to files (it supports JijJa2 language)
+
+Vars:
+	Both the var and defaults stores the variables, but high prefernce to vars and difficult to override.
+
+
+Credentials:
+		secret key LugkIix50uXw+VTB0QcWk58xU8xPyp1qaeKQQSjn
+		access key AKIAIA2VOKBZDSL3DHJA	
